@@ -28,9 +28,9 @@ Remember to upload all files before submitting.
 #include "Node.h"
 
 class MyString {
-  //private:
-public:
+private:
   Node<char>* head;
+  Node<char>* tail;
 public:
   MyString() {
     this->head = nullptr;
@@ -44,7 +44,16 @@ public:
       prevNode->setNext(currNode);
       prevNode = currNode;
     }
-    prevNode = nullptr;
+    tail = prevNode;
+  }
+  Node<char>* getHead() const {
+    return this->head;
+  }
+  Node<char>* getTail() const {
+    return this->tail;
+  }
+  void setHead(Node<char>* head) {
+    this->head = head;
   }
   int length() const;                           //
   void append(const MyString& ms);              //
@@ -65,17 +74,19 @@ int main() {
   std::cout << "index(h): " << test.index('h') << std::endl;
   std::cout << "index(o): " << test.index('o') << std::endl;
   std::cout << "index(y): " << test.index('y') << std::endl;
-  
+
+  std::cout << "tail: " << test.getTail()->getData() << std::endl;
+
+  MyString test2 = MyString(" friend.");
+  test.append(test2);
+  std::cout << test.toString() << std::endl; 
   return 0;
 }
 
 void MyString::append(const MyString& ms) {
-  Node<char>* currNode = head->getNext();
-  while (currNode->getNext() != nullptr) {
-    currNode = currNode->getNext();
-  }
-
-  currNode->setNext(nullptr);
+  Node<char>* next = ms.getHead()->getNext();
+  this->tail->setNext(next);
+  this->tail = ms.getTail();
 }
 
 int MyString::index(char ch) const {
@@ -99,3 +110,4 @@ std::string MyString::toString() const {
   }
   return s;
 }
+
