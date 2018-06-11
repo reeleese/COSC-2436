@@ -4,6 +4,9 @@ private:
   itemType data;
   Node* next;
 public:
+  Node() {
+    setNext(nullptr);
+  }
   Node(itemType data, Node* next){
     setData(data);
     setNext(next);

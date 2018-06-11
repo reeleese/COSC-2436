@@ -28,11 +28,24 @@ Remember to upload all files before submitting.
 #include "Node.h"
 
 class MyString {
-private:
-
+  //private:
 public:
-  MyString();
-  MyString(const std::string s);
+  Node<char>* head;
+public:
+  MyString() {
+    this->head = nullptr;
+  }
+  MyString(const std::string s) {
+    this->head = new Node<char>();
+    Node<char>* prevNode = head;
+    for (char x: s) {
+      Node<char>* currNode = new Node<char>();
+      currNode->setData(x);
+      prevNode->setNext(currNode);
+      prevNode = currNode;
+    }
+    
+  }
   int length() const;
   void append(const MyString& lc);
   int index(char ch) const; // -1 if no match
@@ -45,5 +58,8 @@ int main() {
   one->setNext(two);
   std::cout << one->getNext()->getData() << std::endl;
 
+  MyString test = MyString("hello");
+  std::cout << test.head->getNext()->getData() << std::endl;
+  
   return 0;
 }
