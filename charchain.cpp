@@ -61,8 +61,24 @@ int main() {
 
   MyString test = MyString("henlo");
   std::cout << test.toString() << std::endl;
+
+  std::cout << "index(h): " << test.index('h') << std::endl;
+  std::cout << "index(o): " << test.index('o') << std::endl;
+  std::cout << "index(y): " << test.index('y') << std::endl;
   
   return 0;
+}
+
+int MyString::index(char ch) const {
+  int index = 0;
+  Node<char>* currNode = head->getNext();
+  while (currNode != nullptr) {
+    if(currNode->getData() == ch)
+      return index;
+    currNode = currNode->getNext();
+    ++index;
+  }
+  return -1;
 }
 
 std::string MyString::toString() const {
