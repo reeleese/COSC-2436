@@ -44,12 +44,13 @@ public:
       prevNode->setNext(currNode);
       prevNode = currNode;
     }
-    
+    prevNode = nullptr;
   }
   int length() const;
   void append(const MyString& lc);
   int index(char ch) const; // -1 if no match
   bool substring(const MyString& lc) const;
+  std::string toString() const;
 };
 
 int main() {
@@ -58,8 +59,18 @@ int main() {
   one->setNext(two);
   std::cout << one->getNext()->getData() << std::endl;
 
-  MyString test = MyString("hello");
-  std::cout << test.head->getNext()->getData() << std::endl;
+  MyString test = MyString("henlo");
+  std::cout << test.toString() << std::endl;
   
   return 0;
+}
+
+std::string MyString::toString() const {
+  std::string s = "";
+  Node<char>* currNode = head->getNext();
+  while (currNode != nullptr) {
+    s.push_back(currNode->getData());
+    currNode = currNode->getNext();
+  }
+  return s;
 }

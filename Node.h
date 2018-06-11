@@ -6,6 +6,7 @@ private:
 public:
   Node() {
     setNext(nullptr);
+    setData(itemType{});
   }
   Node(itemType data, Node* next){
     setData(data);
