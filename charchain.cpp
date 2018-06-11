@@ -46,11 +46,11 @@ public:
     }
     prevNode = nullptr;
   }
-  int length() const;
-  void append(const MyString& lc);
-  int index(char ch) const; // -1 if no match
-  bool substring(const MyString& lc) const;
-  std::string toString() const;
+  int length() const;                           //
+  void append(const MyString& ms);              //
+  int index(char ch) const; // -1 if no match   // Done
+  bool substring(const MyString& lc) const;     //
+  std::string toString() const;                 // Done
 };
 
 int main() {
@@ -67,6 +67,15 @@ int main() {
   std::cout << "index(y): " << test.index('y') << std::endl;
   
   return 0;
+}
+
+void MyString::append(const MyString& ms) {
+  Node<char>* currNode = head->getNext();
+  while (currNode->getNext() != nullptr) {
+    currNode = currNode->getNext();
+  }
+
+  currNode->setNext(nullptr);
 }
 
 int MyString::index(char ch) const {
