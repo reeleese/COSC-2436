@@ -31,9 +31,11 @@ class MyString {
 private:
   Node<char>* head;
   Node<char>* tail;
+  int size;
 public:
   MyString() {
-    this->head = nullptr;
+    head = nullptr;
+    size = 0;
   }
   MyString(const std::string s) {
     this->head = new Node<char>();
@@ -45,6 +47,7 @@ public:
       prevNode = currNode;
     }
     tail = prevNode;
+    size = s.length();
   }
   Node<char>* getHead() const {
     return this->head;
@@ -55,10 +58,12 @@ public:
   void setHead(Node<char>* head) {
     this->head = head;
   }
-  int length() const;                           //
-  void append(const MyString& ms);              //
+  int length() const {
+    return size;
+  }
+  void append(const MyString& ms);              // Done
   int index(char ch) const; // -1 if no match   // Done
-  bool substring(const MyString& lc) const;     //
+  bool substring(const MyString& ms ) const;    //
   std::string toString() const;                 // Done
 };
 
@@ -79,7 +84,10 @@ int main() {
 
   MyString test2 = MyString(" friend.");
   test.append(test2);
-  std::cout << test.toString() << std::endl; 
+  std::cout << test.toString() << std::endl;
+
+  MyString test3 = MyString("friend.z");
+  std::cout << (test.substring(test3)?"yes":"no") << std::endl;
   return 0;
 }
 
@@ -109,5 +117,23 @@ std::string MyString::toString() const {
     currNode = currNode->getNext();
   }
   return s;
+}
+
+bool MyString::substring(const MyString& ms) const {
+  Node<char>* firstComp = ms.getHead()->getNext();
+  Node<char>* curr = getHead()->getNext();
+
+  Node<char>* comp = firstComp;
+  while(curr != nullptr) {
+    // I found the first char
+    while(curr->getData() == comp->getData()) {
+      curr = curr->getNext();
+      comp = comp->getNext();
+      if(comp == nullptr) return true; 
+    }
+    curr = curr->getNext();
+    comp = firstComp;
+  }
+  return false;
 }
 
