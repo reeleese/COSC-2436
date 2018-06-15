@@ -25,8 +25,10 @@ Remember to upload all files before submitting.
 
 #include <iostream>
 #include <string>
-#include "Node.h"
+//#include "Node.h"
+#include "MyString.h"
 
+/*
 class MyString {
 private:
   Node<char>* head;
@@ -63,17 +65,53 @@ public:
   }
   void append(const MyString& ms);              // Done
   int index(char ch) const; // -1 if no match   // Done
-  bool substring(const MyString& ms ) const;    //
+  bool substring(const MyString& ms ) const;    // Done
   std::string toString() const;                 // Done
 };
+*/
 
-void test();
+// menu functions
+void tester();
+void storeString(MyString&);
+void getLength(MyString&);
+void combineString(MyString&);
 
 int main() {
-  test();
+  // Make a new string
+  MyString user_str;
+  storeString(user_str);
+
+  // Get length of user_str
+  getLength(user_str);
+
+  // Append new list to user_str
+  combineString(user_str);
+
   return 0;
 }
 
+void storeString(MyString& ms) {
+  std::cout << "Enter a string to store as a linked list: ";
+
+  std::string str;
+  std::getline(std::cin, str);
+  ms = MyString(str);
+}
+
+void getLength(MyString& ms) {
+  std::cout << "The length of your string is: "
+            << ms.length() << std::endl;
+}
+void combineString(MyString& ms) {
+  std::cout << "You will need another string." << std::endl;
+  MyString toAppend;
+  storeString(toAppend);
+
+  ms.append(toAppend);
+  std::cout << "Your new string is: " << ms.toString() << std::endl;
+}
+
+/*
 void MyString::append(const MyString& ms) {
   Node<char>* next = ms.getHead()->getNext();
   this->tail->setNext(next);
@@ -120,8 +158,9 @@ bool MyString::substring(const MyString& ms) const {
   }
   return false;
 }
+*/
 
-void test() {
+void tester() {
   Node<int>* one = new Node<int>(1, nullptr);
   Node<int>* two = new Node<int>(2, nullptr);
   one->setNext(two);
