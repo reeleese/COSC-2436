@@ -25,58 +25,21 @@ Remember to upload all files before submitting.
 
 #include <iostream>
 #include <string>
-//#include "Node.h"
 #include "MyString.h"
-
-/*
-class MyString {
-private:
-  Node<char>* head;
-  Node<char>* tail;
-  int size;
-public:
-  MyString() {
-    head = nullptr;
-    size = 0;
-  }
-  MyString(const std::string s) {
-    this->head = new Node<char>();
-    Node<char>* prevNode = head;
-    for (char x: s) {
-      Node<char>* currNode = new Node<char>();
-      currNode->setData(x);
-      prevNode->setNext(currNode);
-      prevNode = currNode;
-    }
-    tail = prevNode;
-    size = s.length();
-  }
-  Node<char>* getHead() const {
-    return this->head;
-  }
-  Node<char>* getTail() const {
-    return this->tail;
-  }
-  void setHead(Node<char>* head) {
-    this->head = head;
-  }
-  int length() const {
-    return size;
-  }
-  void append(const MyString& ms);              // Done
-  int index(char ch) const; // -1 if no match   // Done
-  bool substring(const MyString& ms ) const;    // Done
-  std::string toString() const;                 // Done
-};
-*/
 
 // menu functions
 void tester();
 void storeString(MyString&);
 void getLength(MyString&);
 void combineString(MyString&);
+void getIndex(MyString&);
+void isSubstring(MyString&);
 
 int main() {
+  
+
+
+  
   // Make a new string
   MyString user_str;
   storeString(user_str);
@@ -87,7 +50,13 @@ int main() {
   // Append new list to user_str
   combineString(user_str);
 
+  // get index of a char
+  getIndex(user_str);
+
+  // is substring
+  isSubstring(user_str);
   return 0;
+  
 }
 
 void storeString(MyString& ms) {
@@ -102,6 +71,7 @@ void getLength(MyString& ms) {
   std::cout << "The length of your string is: "
             << ms.length() << std::endl;
 }
+
 void combineString(MyString& ms) {
   std::cout << "You will need another string." << std::endl;
   MyString toAppend;
@@ -111,54 +81,31 @@ void combineString(MyString& ms) {
   std::cout << "Your new string is: " << ms.toString() << std::endl;
 }
 
-/*
-void MyString::append(const MyString& ms) {
-  Node<char>* next = ms.getHead()->getNext();
-  this->tail->setNext(next);
-  this->tail = ms.getTail();
+void getIndex(MyString& ms) {
+  std::cout << "Character to search for: ";
+
+  char toFind;
+  std::cin.get(toFind);
+  std::cin.ignore();
+
+  int index = ms.index(toFind);
+  if (index == -1)
+    std::cout << toFind << " was not found." << std::endl;
+  else
+    std::cout << toFind << " is at: " << index << std::endl; 
 }
 
-int MyString::index(char ch) const {
-  int index = 0;
-  Node<char>* currNode = head->getNext();
-  while (currNode != nullptr) {
-    if(currNode->getData() == ch)
-      return index;
-    currNode = currNode->getNext();
-    ++index;
-  }
-  return -1;
-}
+void isSubstring(MyString& ms) {
+  std::cout << "You will need another string." << std::endl;
+  MyString sub;
+  storeString(sub);
 
-std::string MyString::toString() const {
-  std::string s = "";
-  Node<char>* currNode = head->getNext();
-  while (currNode != nullptr) {
-    s.push_back(currNode->getData());
-    currNode = currNode->getNext();
-  }
-  return s;
+  if (ms.substring(sub))
+    std::cout << sub.toString() << " is a substring." << std::endl;
+  else
+    std::cout << sub.toString() << " is not a substring." << std::endl; 
+  
 }
-
-bool MyString::substring(const MyString& ms) const {
-  Node<char>* firstComp = ms.getHead()->getNext();
-  Node<char>* curr = getHead()->getNext();
-
-  Node<char>* comp = firstComp;
-  while(curr != nullptr) {
-    // I found the first char
-    while(curr->getData() == comp->getData()) {
-      curr = curr->getNext();
-      comp = comp->getNext();
-      if(comp == nullptr) return true;
-      if(curr == nullptr) return false;
-    }
-    curr = curr->getNext();
-    comp = firstComp;
-  }
-  return false;
-}
-*/
 
 void tester() {
   Node<int>* one = new Node<int>(1, nullptr);

@@ -7,11 +7,12 @@ private:
   Node<char>* tail;
   int size;
 public:
-  MyString() {
+  // Constructors
+  MyString() { // Def Constructor
     head = nullptr;
     size = 0;
   }
-  MyString(const std::string s) {
+  MyString(const std::string s) { // Constructor
     this->head = new Node<char>();
     Node<char>* prevNode = head;
     for (char x: s) {
@@ -23,28 +24,35 @@ public:
     tail = prevNode;
     size = s.length();
   }
+
+  // Accessors
   Node<char>* getHead() const {
     return this->head;
   }
   Node<char>* getTail() const {
     return this->tail;
   }
+
+  // Mutators
   void setHead(Node<char>* head) {
     this->head = head;
+  }
+  void setTail(Node<char>* tail) {
+    this->tail = tail;
   }
   int length() const {
     return size;
   }
-  void append(const MyString& ms);              // Done
-  int index(char ch) const; // -1 if no match   // Done
-  bool substring(const MyString& ms ) const;    // Done
-  std::string toString() const;                 // Done
+  void append(const MyString& ms);
+  int index(char ch) const; // -1 if no match
+  bool substring(const MyString& ms ) const;
+  std::string toString() const;
 };
 
 void MyString::append(const MyString& ms) {
   Node<char>* next = ms.getHead()->getNext();
-  this->tail->setNext(next);
-  this->tail = ms.getTail();
+  this->getTail()->setNext(next);
+  this->setTail(ms.getTail());
 }
 
 int MyString::index(char ch) const {
