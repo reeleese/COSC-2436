@@ -36,28 +36,39 @@ void getIndex(MyString&);
 void isSubstring(MyString&);
 
 int main() {
-  
+  std::cout << "MyString is a linked-list implementation of string.\n"
+            << "Try it out.\n" << std::endl;
+  std::cout << "Make sure to make a MyString before selecting other options.";
 
+  bool done = false;
+  while (!done) {
+    std::cout << "\nm)ake new MyString, l)ength of MyString,\n"
+              << "a)ppend to MyString, get i)ndex of a character,\n"
+              << "test s)ubstring, q)uit."
+              << std::endl;
 
-  
-  // Make a new string
-  MyString user_str;
-  storeString(user_str);
+    std::cout << "Option: ";
+    char choice;
+    std::cin.get(choice);
+    std::cin.ignore();
 
-  // Get length of user_str
-  getLength(user_str);
-
-  // Append new list to user_str
-  combineString(user_str);
-
-  // get index of a char
-  getIndex(user_str);
-
-  // is substring
-  isSubstring(user_str);
-  return 0;
-  
-}
+    static MyString user_string;
+    switch(choice) {
+    case 'm' : storeString(user_string);
+               break;
+    case 'l' : getLength(user_string);
+               break;
+    case 'a' : combineString(user_string);
+               break;
+    case 'i' : getIndex(user_string);
+               break;
+    case 's' : isSubstring(user_string);
+               break;
+    case 'q' : done = true;
+               break;
+    } // end switch
+  } // end while
+} // end main
 
 void storeString(MyString& ms) {
   std::cout << "Enter a string to store as a linked list: ";
@@ -82,7 +93,7 @@ void combineString(MyString& ms) {
 }
 
 void getIndex(MyString& ms) {
-  std::cout << "Character to search for: ";
+  std::cout << "Character to search for (case sensitive): ";
 
   char toFind;
   std::cin.get(toFind);
