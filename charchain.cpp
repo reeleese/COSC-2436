@@ -67,27 +67,10 @@ public:
   std::string toString() const;                 // Done
 };
 
+void test();
+
 int main() {
-  Node<int>* one = new Node<int>(1, nullptr);
-  Node<int>* two = new Node<int>(2, nullptr);
-  one->setNext(two);
-  std::cout << one->getNext()->getData() << std::endl;
-
-  MyString test = MyString("henlo");
-  std::cout << test.toString() << std::endl;
-
-  std::cout << "index(h): " << test.index('h') << std::endl;
-  std::cout << "index(o): " << test.index('o') << std::endl;
-  std::cout << "index(y): " << test.index('y') << std::endl;
-
-  std::cout << "tail: " << test.getTail()->getData() << std::endl;
-
-  MyString test2 = MyString(" friend.");
-  test.append(test2);
-  std::cout << test.toString() << std::endl;
-
-  MyString test3 = MyString("friend.z");
-  std::cout << (test.substring(test3)?"yes":"no") << std::endl;
+  test();
   return 0;
 }
 
@@ -129,11 +112,35 @@ bool MyString::substring(const MyString& ms) const {
     while(curr->getData() == comp->getData()) {
       curr = curr->getNext();
       comp = comp->getNext();
-      if(comp == nullptr) return true; 
+      if(comp == nullptr) return true;
+      if(curr == nullptr) return false;
     }
     curr = curr->getNext();
     comp = firstComp;
   }
   return false;
+}
+
+void test() {
+  Node<int>* one = new Node<int>(1, nullptr);
+  Node<int>* two = new Node<int>(2, nullptr);
+  one->setNext(two);
+  std::cout << one->getNext()->getData() << std::endl;
+
+  MyString test = MyString("henlo");
+  std::cout << test.toString() << std::endl;
+
+  std::cout << "index(h): " << test.index('h') << std::endl;
+  std::cout << "index(o): " << test.index('o') << std::endl;
+  std::cout << "index(y): " << test.index('y') << std::endl;
+
+  std::cout << "tail: " << test.getTail()->getData() << std::endl;
+
+  MyString test2 = MyString(" friend.");
+  test.append(test2);
+  std::cout << test.toString() << std::endl;
+
+  MyString test3 = MyString("friend.s");
+  std::cout << (test.substring(test3)?"yes":"no") << std::endl;
 }
 
