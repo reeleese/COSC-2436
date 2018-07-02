@@ -16,3 +16,42 @@ Remember to upload all files before submitting.
     postfix.cpp
 
 */
+#include <iostream>
+#include <string>
+#include <stack>
+#include <stdlib.h>
+
+int evaluate(std::stack<char>&);
+
+int main() {
+  // Get expression
+  std::cout << "Expression to evaluate: ";
+  std::string expr;
+  getline(std::cin, expr);
+
+  // Fill stack
+  std::stack<char> post;
+  for (char& x : expr)
+    post.push(x);
+  
+  std::cout << "Result: " << evaluate(post) << std::endl;
+
+  
+
+  
+  return 0;
+} // end main
+
+int evaluate(std::stack<char>& post) {
+  char x = post.top(); post.pop();
+  if (47 < x && x < 58) // if x is an integer
+    return x - 48;
+  if (x == '+')
+    return evaluate(post) + evaluate(post);
+  else if (x == '-')
+    return evaluate(post) - evaluate(post);
+  else if (x == '*')
+    return evaluate(post) * evaluate(post);
+  else if (x == '/')
+    return evaluate(post) / evaluate(post);
+}

@@ -68,7 +68,7 @@ void storeString(MyString& ms, std::string prompt) {
 
   std::string str;
   std::getline(std::cin, str);
-  ms = MyString(str);
+  ms = MyString(MyString(str));
 }
 
 void getLength(MyString& ms) {

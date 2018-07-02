@@ -34,6 +34,23 @@ public:
     size = s.length();
   }
 
+  MyString(const MyString& ms) {
+    head = new Node<char>;
+    Node<char>* prevNode = head;
+    Node<char>* curr;
+    Node<char>* curr_ms = ms.getHead()->getNext();
+    
+    while(curr_ms != nullptr) {
+      curr = new Node<char>;
+      curr->setData(curr_ms->getData());
+      prevNode->setNext(curr);
+      prevNode = curr;
+      curr_ms = curr_ms->getNext();
+    }
+    tail = prevNode;
+    size = ms.length();
+  }
+
   // Accessors
   Node<char>* getHead() const {
     return this->head;
@@ -59,7 +76,7 @@ public:
   bool substring(const MyString& ms) const;
   bool substringHelper(Node<char>*, Node<char>*) const;
   std::string toString() const;
-  /*~MyString();*/
+  ~MyString();
 };
 
 // Sticks a new MyString onto the end of this one
@@ -125,18 +142,21 @@ std::string MyString::toString() const {
   return s;
 }
 
-/*
+
 MyString::~MyString() {
+  std::cout << "In destructor..." << std::endl;
   Node<char>* nodeToDeletePtr = getHead();
   while (getHead() != nullptr) {
      setHead(getHead()->getNext());
 
       // Return node to the system
       nodeToDeletePtr->setNext(nullptr);
+      std::cout << "Deleting " << nodeToDeletePtr << std::endl;
       delete nodeToDeletePtr;
       
       nodeToDeletePtr = getHead();
    }  // end while
   size = 0;
+  std::cout << "Out destructor." << std::endl;
 }
-*/
+
