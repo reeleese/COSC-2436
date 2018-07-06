@@ -43,3 +43,60 @@ bob  monopoly candy cane
 alice  dress
 tim  superman comic car pony
 */
+/*
+  Author: Lee Reese
+  Lab: 4
+  Files: Child.h, giftlist.cpp
+*/
+#include <iostream>
+#include "Child.h"
+#include <list>
+
+int main() {
+  std::string name;
+  std::string gift;
+  std::list<Child> kids;
+
+  bool done = false;
+  while (!done) {
+    // Get name
+    std::cout << "name for nice list: ";
+    std::getline(std::cin, name);
+
+    // If there is a name
+    if (name != "") {
+      // Create child with name
+      Child kid = Child(name);
+
+      // Get the gifts
+      std::cout << "add gifts for " << name <<std::endl;
+      bool done_gift = false;
+      while (!done_gift) {
+        std::cout << "gift: ";
+        std::getline(std::cin, gift);
+
+        // Note: addGift does not take empty strings
+        kid.addGift(gift);
+        if (gift == "")
+          done_gift = true;
+      } // end while "gift"
+
+      // Record the kid, complete with gifts
+      kids.push_back(kid);
+    } // end if "name"
+
+    // If no name, done
+    else
+      done = true;
+  } // end while "name"
+
+  // Display all kids and their gifts
+  if (!kids.empty()) {
+    std::cout << "The list contains";
+    std::list<Child>::iterator it;
+    for (it = kids.begin(); it != kids.end(); it++)
+      it->display();
+  }
+  
+  return 0;
+}
