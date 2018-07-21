@@ -26,7 +26,7 @@ class Child {
     std::cout << name << " ";
     // display gifts
     std::list<std::string>::iterator it;
-    for(it = gifts.begin(); it != gifts.end(); it++) {
+    for(it = gifts.begin(); it != gifts.end(); ++it) {
       std::cout << ' ' << *it;
     }
     // newline

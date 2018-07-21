@@ -3,37 +3,37 @@
   Lab 2
 */
 
-template <class itemType>
+template <class ItemType>
 class Node {
 private:
-  itemType data;
-  Node* next;
+  ItemType data;
+  std::shared_ptr<Node<ItemType>> next;
 public:
   // Constructors
   Node() {
     setNext(nullptr);
-    setData(itemType{});
+    setData(ItemType{});
   }
-  Node(itemType data, Node* next){
+  Node(ItemType data, std::shared_ptr<Node<ItemType>> next){
     setData(data);
     setNext(next);
   }
 
   // Accessors
-  itemType getData() const {
+  ItemType getData() const {
     return data;
   }
 
-  Node* getNext() const {
+  std::shared_ptr<Node<ItemType>> getNext() const {
     return next;
   }
 
   // Mutators
-  void setData(itemType data) {
+  void setData(ItemType data) {
     this->data = data;
   }
 
-  void setNext(Node* next) {
+  void setNext(std::shared_ptr<Node<ItemType>> next) {
     this->next = next;
   }
 };
