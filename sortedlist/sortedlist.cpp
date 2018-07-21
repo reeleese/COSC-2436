@@ -18,7 +18,20 @@ Remember to upload all files before submitting.
 
 #include <time.h>
 #include <stdlib.h>
+#include <iostream>
 #include "LinkedSortedList.h"
+
+void displayList(LinkedSortedList<int> list) {
+  for (int pos = 1; pos <= list.getLength(); pos++) {
+    if (pos == list.getLength())
+      std::cout << list.getEntry(pos);
+    else
+      std::cout << list.getEntry(pos) << ", ";
+   }
+  
+  std::cout << std::endl << std::endl;
+}
+
 int main() {
 
   srand(time(NULL));
@@ -30,8 +43,16 @@ int main() {
     sortedList.insertSorted(rando);
   }
 
+  std::cout << "The list with 21 random integers:\n";
+  displayList(sortedList);
+  
   // Remove last item inserted
   sortedList.remove(21);
+
+  // Display new list
+  std::cout << "The list minus the last integer:\n";
+  displayList(sortedList);
+  
   
   return 0;
 }
