@@ -17,3 +17,13 @@ Remember to upload all files before submitting.
 
     sortedtree.cpp
 */
+
+#include "BinarySearchTree.h"
+
+#include <iostream>
+
+int main() {
+  BinarySearchTree<int> test = BinarySearchTree<int>();
+  
+  return 0;
+}
