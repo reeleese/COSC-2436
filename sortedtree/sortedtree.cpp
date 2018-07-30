@@ -24,6 +24,9 @@ Remember to upload all files before submitting.
 
 int main() {
   BinarySearchTree<int> test = BinarySearchTree<int>();
-  
+  std::cout << test.isEmpty() << std::endl;
+
+  BinarySearchTree<int> test1 = BinarySearchTree<int>(4);
+  std::cout << test.isEmpty() << std::endl;
   return 0;
 }
